@@ -55,7 +55,7 @@ export class ExamComponent implements OnInit {
   }
 
   private checkResult(res) {
-    console.log(this.equationSigns[4]1);
+    console.log(this.equationSigns[4]);
   }
 
   private addSymbol(symbol) {
