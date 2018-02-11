@@ -15,6 +15,7 @@ export class ExamComponent implements OnInit {
   result: string = "";
   equationSigns: string[];
   handler: Function;
+  spec: EquationSpec;
 
   constructor(private renderer : Renderer, 
     private equationGeneratorService: EquationGeneratorService,
@@ -27,12 +28,13 @@ export class ExamComponent implements OnInit {
 
   startNewEquation() : void {
     this.result = "";
-    var spec: EquationSpec = {
+    this.spec = {
       action: Action.Mult,
-      maxNumber: 3,
+      maxFirstNumber: 3,
+      maxSecondNumber: 10,
       strict: false
     }
-    this.equation = this.equationGeneratorService.getEquation(spec);
+    this.equation = this.equationGeneratorService.getEquation(this.spec);
     this.handler = this.renderer.listen('document', "keydown", event =>{ this.parseInput(event); });
     this.equationSigns = this.eq2strService.getEquationSigns(this.equation);
   }
@@ -58,14 +60,24 @@ export class ExamComponent implements OnInit {
   }
 
   private parseInput(e){
+    var maxLength = this.eq2strService.getMaxEquationLength(this.spec);
+    
     console.log("Pressed key", e.keyCode);
     if (e.keyCode === 13) {
       this.checkResult();
+      return;
     }
     if (e.keyCode === 8)
     {
       this.remLastSymbol();
+      return;
     }
+
+    if (this.equationSigns[4].length >= maxLength)
+    {
+      return;
+    }
+
     if ((e.keyCode >= 48 && e.keyCode <= 57) 
       || (e.keyCode >= 96 && e.keyCode <= 105)) {
       this.addSymbol(e.key);

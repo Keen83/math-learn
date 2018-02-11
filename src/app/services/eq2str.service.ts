@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Action } from '../models/Action'
-import { Equation } from '../models/Equation'
+import { Equation, EquationSpec } from '../models/Equation'
 
 @Injectable()
 export class Eq2strService {
@@ -36,6 +36,21 @@ export class Eq2strService {
     arr[4] = "";
 
     return arr;
+  }
+
+  getMaxEquationLength(spec: EquationSpec): number {
+    if (!spec) return 0;
+
+    switch(spec.action) {
+      case Action.Add:
+        return spec.maxFirstNumber.toString().length;
+      case Action.Sub:
+        return spec.maxFirstNumber.toString().length;
+      case Action.Mult:
+        return (spec.maxFirstNumber * spec.maxSecondNumber).toString().length;
+      case Action.Div:
+        return (spec.maxFirstNumber * spec.maxSecondNumber).toString().length;
+    }
   }
 
 }

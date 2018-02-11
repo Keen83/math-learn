@@ -9,6 +9,7 @@ export interface Equation {
 
 export interface EquationSpec {
     action: Action,
-    maxNumber: number,
+    maxFirstNumber: number,
+    maxSecondNumber?: number,
     strict?: boolean
 }

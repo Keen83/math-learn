@@ -13,8 +13,8 @@ export class EquationGeneratorService {
   }
 
   getAddEquation(spec: EquationSpec): Equation {
-    var number1 = this.getRandomIntNumber(0, spec.maxNumber);
-    var number2 = this.getRandomIntNumber(0, spec.maxNumber - number1);
+    var number1 = this.getRandomIntNumber(0, spec.maxFirstNumber);
+    var number2 = this.getRandomIntNumber(0, spec.maxFirstNumber - number1);
     return {
       number1: number1,
       number2: number2,
@@ -24,8 +24,8 @@ export class EquationGeneratorService {
   };
 
   getSubEquation(spec: EquationSpec) : Equation {
-    var number1 = this.getRandomIntNumber(0, spec.maxNumber);
-    var number2 = this.getRandomIntNumber(0, spec.maxNumber - number1);
+    var number1 = this.getRandomIntNumber(0, spec.maxFirstNumber);
+    var number2 = this.getRandomIntNumber(0, spec.maxFirstNumber - number1);
     return {
       number1: number1 + number2,
       number2: number1,
@@ -36,9 +36,9 @@ export class EquationGeneratorService {
 
   getMultEquation(spec: EquationSpec) : Equation {
     var number1 = spec.strict 
-      ? spec.maxNumber 
-      : this.getRandomIntNumber(0, spec.maxNumber);
-    var number2 = this.getRandomIntNumber(0, 10);
+      ? spec.maxFirstNumber 
+      : this.getRandomIntNumber(0, spec.maxFirstNumber);
+    var number2 = this.getRandomIntNumber(0,spec.maxSecondNumber);
     
     return {
       number1: number1,
@@ -50,9 +50,9 @@ export class EquationGeneratorService {
 
   getDivEquation(spec: EquationSpec) : Equation {
     var number1 = spec.strict 
-      ? spec.maxNumber 
-      : this.getRandomIntNumber(1, spec.maxNumber);
-    var number2 = this.getRandomIntNumber(0, 10);
+      ? spec.maxFirstNumber 
+      : this.getRandomIntNumber(1, spec.maxFirstNumber);
+    var number2 = this.getRandomIntNumber(0, spec.maxSecondNumber);
     
     return {
       number1: number1 * number2,
