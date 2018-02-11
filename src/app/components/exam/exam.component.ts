@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Renderer } from '@angular/core';
 import { Equation, EquationSpec } from '../../models/Equation';
 import { Action } from '../../models/Action';
@@ -16,6 +16,7 @@ export class ExamComponent implements OnInit {
   equationSigns: string[];
   handler: Function;
   spec: EquationSpec;
+  @ViewChild('inp') inp:ElementRef;
 
   constructor(private renderer : Renderer, 
     private equationGeneratorService: EquationGeneratorService,
@@ -24,6 +25,15 @@ export class ExamComponent implements OnInit {
 
   ngOnInit() {
     this.startNewEquation();
+    this.setInitialFocus();
+  }
+
+  setInitialFocus() {
+    this.renderer.invokeElementMethod(this.inp.nativeElement, 'focus');
+  }
+
+  onBlurMethod() {
+    this.setInitialFocus();
   }
 
   startNewEquation() : void {
