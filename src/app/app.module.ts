@@ -6,6 +6,8 @@ import { AppComponent } from './components/app.component';
 import { ExamComponent } from './components/exam/exam.component';
 import { SignComponent } from './components/sign/sign.component';
 
+import {EquationGeneratorService} from './services/equation-generator.service'
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,7 @@ import { SignComponent } from './components/sign/sign.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [EquationGeneratorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,25 +2,27 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Equation } from '../../models/Equation';
 import { Action } from '../../models/Action'
 
+import {EquationGeneratorService} from '../../services/equation-generator.service'
+
 @Component({
   selector: 'app-exam',
   templateUrl: './exam.component.html',
   styleUrls: ['./exam.component.css']
 })
 export class ExamComponent implements OnInit {
-  equation: Equation = {
-    number1: 123,
-    number2: 33,
-    result: 156,
-    action: Action.Add
-  }
+  equation: Equation;
   result: string = "";
+  equationSigns: string[];
 
-  equationSigns = this.getEquationSigns(this.equation);
-
-  constructor() { }
+  constructor(private equationGeneratorService: EquationGeneratorService) { }
 
   ngOnInit() {
+    this.equation = this.getEquation();
+    this.equationSigns = this.getEquationSigns(this.equation);
+  }
+
+  getEquation(): Equation {
+    return this.equationGeneratorService.getEquation(10, Action.Mult);
   }
 
   private getActionSign(act: Action) : string {
