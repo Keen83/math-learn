@@ -23,7 +23,14 @@ export class EquationGeneratorService {
   };
 
   getSubEquation(maxValue) : Equation {
-    throw Error("Операція віднімання в розробці");
+    var number1 = this.getRandomIntNumber(0, maxValue);
+    var number2 = this.getRandomIntNumber(0, maxValue - number1);
+    return {
+      number1: number1 + number2,
+      number2: number1,
+      result: number2,
+      action: Action.Sub
+    }
   }
 
   getMultEquation(maxValue) : Equation {

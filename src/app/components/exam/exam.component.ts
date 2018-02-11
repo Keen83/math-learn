@@ -26,7 +26,8 @@ export class ExamComponent implements OnInit {
   }
 
   startNewEquation() : void {
-    this.equation = this.equationGeneratorService.getEquation(100, Action.Add);
+    this.result = "";
+    this.equation = this.equationGeneratorService.getEquation(100, Action.Sub);
     this.handler = this.renderer.listen('document', "keydown", event =>{ this.parseInput(event); });
     this.equationSigns = this.eq2strService.getEquationSigns(this.equation);
   }
@@ -38,7 +39,9 @@ export class ExamComponent implements OnInit {
       ? "Правильно!"
       : "Неправильно!";
     this.handler();
-    var timeoutId = setTimeout(() => { clearTimeout(timeoutId); this.startNewEquation(); }, 1000);
+    var timeoutId = setTimeout(() => { 
+      clearTimeout(timeoutId); 
+      this.startNewEquation(); }, 1000);
   }
 
   private addSymbol(symbol) {
