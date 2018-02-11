@@ -15,7 +15,7 @@ export class Eq2strService {
       case Action.Sub:
         return "-";
       case Action.Mult:
-        return "*";
+        return "·";
       case Action.Div:
         return ":";
       default:

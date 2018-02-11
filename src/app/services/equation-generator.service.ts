@@ -33,12 +33,26 @@ export class EquationGeneratorService {
     }
   }
 
-  getMultEquation(maxValue) : Equation {
-    throw Error("Операція множення в розробці");
+  getMultEquation(val: number) : Equation {
+    var number2 = this.getRandomIntNumber(0, 10);
+    
+    return {
+      number1: val,
+      number2: number2,
+      result: val * number2,
+      action: Action.Mult
+    }
   }
 
-  getDivEquation(maxValue) : Equation {
-    throw Error("Операція множення в розробці");
+  getDivEquation(val: number) : Equation {
+    var number2 = this.getRandomIntNumber(0, 10);
+    
+    return {
+      number1: val * number2,
+      number2: val,
+      result: number2,
+      action: Action.Div
+    }
   }
 
   getEquation(maxValue: number, action: Action):Equation {

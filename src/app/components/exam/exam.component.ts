@@ -27,7 +27,7 @@ export class ExamComponent implements OnInit {
 
   startNewEquation() : void {
     this.result = "";
-    this.equation = this.equationGeneratorService.getEquation(100, Action.Sub);
+    this.equation = this.equationGeneratorService.getEquation(3, Action.Div);
     this.handler = this.renderer.listen('document', "keydown", event =>{ this.parseInput(event); });
     this.equationSigns = this.eq2strService.getEquationSigns(this.equation);
   }

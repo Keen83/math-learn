@@ -1,6 +1,6 @@
 import {Action} from './Action';
 
-export class Equation {
+export interface Equation {
     number1: number;
     number2: number;
     result: number;
