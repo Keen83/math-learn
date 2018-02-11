@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { Renderer } from '@angular/core';
 import { Equation } from '../../models/Equation';
-import { Action } from '../../models/Action'
-
+import { Action } from '../../models/Action';
 import {EquationGeneratorService} from '../../services/equation-generator.service'
 
 @Component({
@@ -13,16 +13,18 @@ export class ExamComponent implements OnInit {
   equation: Equation;
   result: string = "";
   equationSigns: string[];
+  handler: Function;
 
-  constructor(private equationGeneratorService: EquationGeneratorService) { }
+  constructor(private renderer : Renderer, private equationGeneratorService: EquationGeneratorService) { }
 
   ngOnInit() {
-    this.equation = this.getEquation();
-    this.equationSigns = this.getEquationSigns(this.equation);
+    this.startNewEquation();
   }
 
-  getEquation(): Equation {
-    return this.equationGeneratorService.getEquation(10, Action.Mult);
+  startNewEquation() : void {
+    this.equation = this.equationGeneratorService.getEquation(100, Action.Add);
+    this.handler = this.renderer.listen('document', "keydown", event =>{ this.parseInput(event); });
+    this.equationSigns = this.getEquationSigns(this.equation);
   }
 
   private getActionSign(act: Action) : string {
@@ -62,25 +64,45 @@ export class ExamComponent implements OnInit {
     this.result = res === this.equation.result
       ? "Правильно!"
       : "Неправильно!";
+    this.handler();
+    var timeoutId = setTimeout(() => { clearTimeout(timeoutId); this.startNewEquation(); }, 1000);
   }
 
   private addSymbol(symbol) {
     this.equationSigns[4] = this.equationSigns[4] + symbol;
   }
 
+  private remLastSymbol() {
+    this.equationSigns[4] = this.equationSigns[4].slice(0,-1);
+  }
+
   private parseInput(e){
+    console.log("Pressed key", e.keyCode);
     if (e.keyCode === 13) {
       this.checkResult();
     }
-    if (e.keyCode >= 48 && e.keyCode <= 57) {
+    if (e.keyCode === 8)
+    {
+      this.remLastSymbol();
+    }
+    if ((e.keyCode >= 48 && e.keyCode <= 57) 
+      || (e.keyCode >= 96 && e.keyCode <= 105)) {
       this.addSymbol(e.key);
     }
   }
 
-  @HostListener('document:keypress', ['$event'])
-  onKeyPress(event: KeyboardEvent) {
-    console.log("Pressed key", event.keyCode);
-    this.parseInput(event);
-  }
+  // @HostListener('document:keypress', ['$event'])
+  // onKeyPress(event: KeyboardEvent) {
+  //   console.log("Pressed key", event.keyCode);
+  //   this.parseInput(event);
+  // }
+
+  //handler = this.renderer.listen('document', "keydown", event =>{ this.parseInput(event); });
+
+  // @HostListener('document:keydown', ['$event'])
+  // onKeyDown(event: KeyboardEvent) {
+  //   console.log("Pressed key", event.keyCode);
+  //   this.parseInput(event);
+  // }
 
 }

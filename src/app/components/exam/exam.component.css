@@ -1,5 +1,4 @@
-div {
-    height: 500px;
+div.flex-container {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
