@@ -6,3 +6,9 @@ export interface Equation {
     result: number;
     action: Action;
 }
+
+export interface EquationSpec {
+    action: Action,
+    maxNumber: number,
+    strict?: boolean
+}

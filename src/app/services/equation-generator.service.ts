@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Equation } from '../models/Equation';
+import { Equation, EquationSpec } from '../models/Equation';
 import { Action } from '../models/Action';
 
 @Injectable()
@@ -8,12 +8,13 @@ export class EquationGeneratorService {
   constructor() { }
 
   getRandomIntNumber(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
+    var maxVal = max + 1; // include max value in scope
+    return Math.floor(Math.random() * (maxVal - min)) + min;
   }
 
-  getAddEquation(maxValue): Equation {
-    var number1 = this.getRandomIntNumber(0, maxValue);
-    var number2 = this.getRandomIntNumber(0, maxValue - number1);
+  getAddEquation(spec: EquationSpec): Equation {
+    var number1 = this.getRandomIntNumber(0, spec.maxNumber);
+    var number2 = this.getRandomIntNumber(0, spec.maxNumber - number1);
     return {
       number1: number1,
       number2: number2,
@@ -22,9 +23,9 @@ export class EquationGeneratorService {
     }
   };
 
-  getSubEquation(maxValue) : Equation {
-    var number1 = this.getRandomIntNumber(0, maxValue);
-    var number2 = this.getRandomIntNumber(0, maxValue - number1);
+  getSubEquation(spec: EquationSpec) : Equation {
+    var number1 = this.getRandomIntNumber(0, spec.maxNumber);
+    var number2 = this.getRandomIntNumber(0, spec.maxNumber - number1);
     return {
       number1: number1 + number2,
       number2: number1,
@@ -33,39 +34,45 @@ export class EquationGeneratorService {
     }
   }
 
-  getMultEquation(val: number) : Equation {
+  getMultEquation(spec: EquationSpec) : Equation {
+    var number1 = spec.strict 
+      ? spec.maxNumber 
+      : this.getRandomIntNumber(0, spec.maxNumber);
     var number2 = this.getRandomIntNumber(0, 10);
     
     return {
-      number1: val,
+      number1: number1,
       number2: number2,
-      result: val * number2,
+      result:  number1 * number2,
       action: Action.Mult
     }
   }
 
-  getDivEquation(val: number) : Equation {
+  getDivEquation(spec: EquationSpec) : Equation {
+    var number1 = spec.strict 
+      ? spec.maxNumber 
+      : this.getRandomIntNumber(1, spec.maxNumber);
     var number2 = this.getRandomIntNumber(0, 10);
     
     return {
-      number1: val * number2,
-      number2: val,
+      number1: number1 * number2,
+      number2: number1,
       result: number2,
       action: Action.Div
     }
   }
 
-  getEquation(maxValue: number, action: Action):Equation {
-    switch (action)
+  getEquation(spec: EquationSpec):Equation {
+    switch (spec.action)
     {
       case Action.Add:
-        return this.getAddEquation(maxValue);
+        return this.getAddEquation(spec);
       case Action.Sub:
-        return this.getSubEquation(maxValue);
+        return this.getSubEquation(spec);
       case Action.Mult:
-        return this.getMultEquation(maxValue);
+        return this.getMultEquation(spec);
       case Action.Div:
-        return this.getDivEquation(maxValue);
+        return this.getDivEquation(spec);
     }
     
   }

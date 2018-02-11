@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Renderer } from '@angular/core';
-import { Equation } from '../../models/Equation';
+import { Equation, EquationSpec } from '../../models/Equation';
 import { Action } from '../../models/Action';
 import {EquationGeneratorService} from '../../services/equation-generator.service'
 import { Eq2strService } from '../../services/eq2str.service';
@@ -27,7 +27,12 @@ export class ExamComponent implements OnInit {
 
   startNewEquation() : void {
     this.result = "";
-    this.equation = this.equationGeneratorService.getEquation(3, Action.Div);
+    var spec: EquationSpec = {
+      action: Action.Mult,
+      maxNumber: 3,
+      strict: false
+    }
+    this.equation = this.equationGeneratorService.getEquation(spec);
     this.handler = this.renderer.listen('document', "keydown", event =>{ this.parseInput(event); });
     this.equationSigns = this.eq2strService.getEquationSigns(this.equation);
   }
