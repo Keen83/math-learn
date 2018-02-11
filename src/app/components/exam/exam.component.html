@@ -1,0 +1,10 @@
+<div>
+  <div class="flex-container">
+    <app-sign *ngFor="let sign of equationSigns" 
+      [num]="sign">
+    </app-sign>
+  </div>
+  <div class="result">
+    {{ result }}
+  </div>
+</div>

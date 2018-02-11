@@ -2,9 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 
-import { AppComponent } from './app.component';
-import { ExamComponent } from './exam/exam.component';
-import { SignComponent } from './sign/sign.component';
+import { AppComponent } from './components/app.component';
+import { ExamComponent } from './components/exam/exam.component';
+import { SignComponent } from './components/sign/sign.component';
 
 
 @NgModule({

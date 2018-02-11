@@ -1,6 +1,7 @@
 div {
-    border: 1px solid red;
+    border-bottom: 1px solid green;
     font-size: 150px;
     min-width: 120px;
     text-align: center;
+    height: 175px;
 }

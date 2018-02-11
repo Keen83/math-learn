@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Equation } from '../Equation';
-import { Action } from '../Action'
+import { Equation } from '../../models/Equation';
+import { Action } from '../../models/Action'
 
 @Component({
   selector: 'app-exam',
@@ -9,12 +9,12 @@ import { Action } from '../Action'
 })
 export class ExamComponent implements OnInit {
   equation: Equation = {
-    number1: 122,
+    number1: 123,
     number2: 33,
-    result: 155,
+    result: 156,
     action: Action.Add
   }
-  res: string = "";
+  result: string = "";
 
   equationSigns = this.getEquationSigns(this.equation);
 
@@ -54,8 +54,12 @@ export class ExamComponent implements OnInit {
     return arr;
   }
 
-  private checkResult(res) {
+  private checkResult() {
     console.log(this.equationSigns[4]);
+    var res = parseInt(this.equationSigns[4]);
+    this.result = res === this.equation.result
+      ? "Правильно!"
+      : "Неправильно!";
   }
 
   private addSymbol(symbol) {
@@ -64,7 +68,7 @@ export class ExamComponent implements OnInit {
 
   private parseInput(e){
     if (e.keyCode === 13) {
-      this.checkResult(this.res);
+      this.checkResult();
     }
     if (e.keyCode >= 48 && e.keyCode <= 57) {
       this.addSymbol(e.key);
