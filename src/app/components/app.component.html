@@ -4,5 +4,6 @@
     {{ title }}
   </h1>
 </div>
-<app-exam></app-exam>
+<app-equation-spec (created)='onSpecCreated($event)' [hidden]="isInExamMode"></app-equation-spec>
+<app-exam #exam [spec]='equationSpec' [hidden]="!isInExamMode"></app-exam>
 

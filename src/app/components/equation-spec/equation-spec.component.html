@@ -1,0 +1,18 @@
+<div>
+  <div>Select action:</div>
+  <select #action (change)="onChange(action.value)">
+    <option [value]="0">Додавання</option>
+    <option [value]="1">Віднімання</option>
+    <option [value]="2">Множення</option>
+    <option [value]="3">Ділення</option>
+  </select>
+  <div>Максимальне число</div>
+  <div>
+    <input #firstNum type="number" name="firstNum" (change)="onFirstNumChange(firstNum.value)" [value]="spec.maxFirstNumber">
+  </div>
+  <div>Строгий підбір</div>
+  <div>
+    <input #strict type="checkbox" name="strict" (change)="onStrictChange(strict.value)" [checked]="spec.strict">
+  </div>
+  <button (click)='specCreated()'>Start</button>
+</div>

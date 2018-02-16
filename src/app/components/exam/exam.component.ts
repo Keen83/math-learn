@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Renderer } from '@angular/core';
 import { Equation, EquationSpec } from '../../models/Equation';
 import { Action } from '../../models/Action';
@@ -15,7 +15,7 @@ export class ExamComponent implements OnInit {
   result: string = "";
   equationSigns: string[];
   handler: Function;
-  spec: EquationSpec;
+  @Input() spec: EquationSpec;
   @ViewChild('inp') inp:ElementRef;
 
   constructor(private renderer : Renderer, 
@@ -23,29 +23,18 @@ export class ExamComponent implements OnInit {
     private eq2strService: Eq2strService
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  startExam(spec: EquationSpec) {
+    this.spec = spec;
     this.startNewEquation();
-    this.setInitialFocus();
-  }
-
-  setInitialFocus() {
-    this.renderer.invokeElementMethod(this.inp.nativeElement, 'focus');
-  }
-
-  onBlurMethod() {
-    this.setInitialFocus();
   }
 
   startNewEquation() : void {
     this.result = "";
-    this.spec = {
-      action: Action.Mult,
-      maxFirstNumber: 3,
-      maxSecondNumber: 10,
-      strict: false
-    }
     this.equation = this.equationGeneratorService.getEquation(this.spec);
     this.handler = this.renderer.listen('document', "keydown", event =>{ this.parseInput(event); });
+    console.log("Subscribed on start");
     this.equationSigns = this.eq2strService.getEquationSigns(this.equation);
   }
 
@@ -56,9 +45,11 @@ export class ExamComponent implements OnInit {
       ? "Правильно!"
       : "Неправильно!";
     this.handler();
+    console.log("Unsubscribed on check");
     var timeoutId = setTimeout(() => { 
       clearTimeout(timeoutId); 
-      this.startNewEquation(); }, 1000);
+      this.startNewEquation();
+      console.log("Starting"); }, 1000);
   }
 
   private addSymbol(symbol) {

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ContentChildren } from '@angular/core';
+import { EquationSpec } from '../models/Equation';
+import { ExamComponent } from './exam/exam.component';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Рахуємо швидко!';
+  equationSpec: EquationSpec;
+  @ViewChild(ExamComponent) exam:ExamComponent;
+
+  isInExamMode: boolean = false;
+
+  onSpecCreated(equationSpec: EquationSpec) {
+    //this.equationSpec = equationSpec;
+    this.isInExamMode = true;
+    console.log("isInExamMode: "+ this.isInExamMode);
+    this.exam.startExam(equationSpec);
+  }
 }
