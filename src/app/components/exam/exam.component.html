@@ -1,9 +1,5 @@
 <div>
-  <div class="flex-container">
-    <app-sign *ngFor="let sign of equationSigns" 
-      [num]="sign">
-    </app-sign>
-  </div>  
+  <app-equation [equationSigns]='equationSigns'></app-equation>
   <div class="result">
     <span>{{ result }}</span>
   </div>

@@ -7,14 +7,16 @@ import { ExamComponent } from './components/exam/exam.component';
 import { SignComponent } from './components/sign/sign.component';
 
 import {EquationGeneratorService} from './services/equation-generator.service';
-import { Eq2strService } from './services/eq2str.service'
+import { Eq2strService } from './services/eq2str.service';
+import { EquationComponent } from './components/equation/equation.component'
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ExamComponent,
-    SignComponent
+    SignComponent,
+    EquationComponent
   ],
   imports: [
     BrowserModule
