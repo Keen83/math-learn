@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { EquationSpec } from '../../models/Equation'
-import { Action } from '../../models/Action'
+import { EquationSpec } from '../../models/Equation';
+import { Action } from '../../models/Action';
 
 
 @Component({
@@ -22,22 +22,22 @@ export class EquationSpecComponent implements OnInit {
       maxFirstNumber: 3,
       maxSecondNumber: 10,
       strict: true
-    }
+    };
   }
 
   onChange(opt) {
-    this.spec.action = parseInt(opt);
-    console.log("Action: " + this.spec.action);
+    this.spec.action = parseInt(opt, 10);
+    console.log('Action: ' + this.spec.action);
   }
 
   onFirstNumChange(firstNum) {
-    this.spec.maxFirstNumber = parseInt(firstNum);
-    console.log("Max first number: " + this.spec.maxFirstNumber);
+    this.spec.maxFirstNumber = parseInt(firstNum, 10);
+    console.log('Max first number: ' + this.spec.maxFirstNumber);
   }
 
   onStrictChange(strict) {
     this.spec.strict = strict;
-    console.log("Strict: " + this.spec.strict);
+    console.log('Strict: ' + this.spec.strict);
   }
 
   specCreated() {

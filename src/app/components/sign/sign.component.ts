@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SignComponent implements OnInit {
   @Input() num: string;
-  
+
   constructor() { }
 
   ngOnInit() {

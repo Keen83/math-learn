@@ -10,14 +10,13 @@ import { ExamComponent } from './exam/exam.component';
 export class AppComponent {
   title = 'Рахуємо швидко!';
   equationSpec: EquationSpec;
-  @ViewChild(ExamComponent) exam:ExamComponent;
+  @ViewChild(ExamComponent) exam: ExamComponent;
 
-  isInExamMode: boolean = false;
+  isInExamMode = false;
 
   onSpecCreated(equationSpec: EquationSpec) {
-    //this.equationSpec = equationSpec;
     this.isInExamMode = true;
-    console.log("isInExamMode: "+ this.isInExamMode);
+    console.log('isInExamMode: ' + this.isInExamMode);
     this.exam.startExam(equationSpec);
   }
 }

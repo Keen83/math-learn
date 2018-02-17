@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Equation } from '../../models/Equation'
+import { Equation } from '../../models/Equation';
 import { Eq2strService } from '../../services/eq2str.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { Eq2strService } from '../../services/eq2str.service';
   styleUrls: ['./equation.component.css']
 })
 export class EquationComponent implements OnInit {
-  @Input() equationSigns: string[];  
+  @Input() equationSigns: string[];
 
   constructor(private eq2strService: Eq2strService) { }
 

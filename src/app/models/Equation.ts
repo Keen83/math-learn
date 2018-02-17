@@ -8,8 +8,8 @@ export interface Equation {
 }
 
 export interface EquationSpec {
-    action: Action,
-    maxFirstNumber: number,
-    maxSecondNumber?: number,
-    strict?: boolean
+    action: Action;
+    maxFirstNumber: number;
+    maxSecondNumber?: number;
+    strict?: boolean;
 }
