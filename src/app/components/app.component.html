@@ -1,9 +1,12 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    {{ title }}
-  </h1>
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <app-equation-spec (created)='onSpecCreated($event)' [hidden]="isInExamMode"></app-equation-spec>
+      <app-exam #exam [spec]='equationSpec' [hidden]="!isInExamMode"></app-exam>
+    </div>
+  </div>
 </div>
-<app-equation-spec (created)='onSpecCreated($event)' [hidden]="isInExamMode"></app-equation-spec>
-<app-exam #exam [spec]='equationSpec' [hidden]="!isInExamMode"></app-exam>
+
 

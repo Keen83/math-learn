@@ -1,18 +1,41 @@
-<div>
-  <div>Select action:</div>
-  <select #action (change)="onChange(action.value)">
-    <option [value]="0">Додавання</option>
-    <option [value]="1">Віднімання</option>
-    <option [value]="2">Множення</option>
-    <option [value]="3">Ділення</option>
-  </select>
-  <div>Максимальне число</div>
-  <div>
-    <input #firstNum type="number" name="firstNum" (change)="onFirstNumChange(firstNum.value)" [value]="spec.maxFirstNumber">
+<div class="row">
+  <div class="col-md-12">
+    <form>
+      <div class="row">
+        <div class="col-sm-5">
+          <label for="action">Вибери дію:</label>
+          <select name="action" class="form-control" [(ngModel)]="spec.action">
+            <option [ngValue]="0">Додавання</option>
+            <option [ngValue]="1">Віднімання</option>
+            <option [ngValue]="2">Множення</option>
+            <option [ngValue]="3">Ділення</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5">
+          <label for="max-number">Максимальне число</label>
+          <input 
+            name="max-number"
+            class="form-control" 
+            type="number" 
+            [(ngModel)]="spec.maxFirstNumber">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5">
+          <label for="strict">Строгий підбір</label>
+          <input 
+            name="strict"
+            type="checkbox" 
+            [(ngModel)]="spec.strict">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5">
+          <button class='btn btn-primary' (click)='specCreated()'>Start</button>
+        </div>
+      </div>
+    </form>
   </div>
-  <div>Строгий підбір</div>
-  <div>
-    <input #strict type="checkbox" name="strict" (change)="onStrictChange(strict.value)" [checked]="spec.strict">
-  </div>
-  <button (click)='specCreated()'>Start</button>
 </div>

@@ -30,19 +30,15 @@ export class EquationSpecComponent implements OnInit {
     console.log('Action: ' + this.spec.action);
   }
 
-  onFirstNumChange(firstNum) {
-    this.spec.maxFirstNumber = parseInt(firstNum, 10);
-    console.log('Max first number: ' + this.spec.maxFirstNumber);
+  onFirstNumChange(e: any) {
+    this.spec.maxFirstNumber = parseInt(e.srcElement.value, 10);
   }
 
-  onStrictChange(strict) {
-    this.spec.strict = strict;
-    console.log('Strict: ' + this.spec.strict);
+  onStrictChange(e: any) {
+    this.spec.strict = e.srcElement.value;
   }
 
   specCreated() {
     this.created.emit(this.spec);
   }
-
-
 }
